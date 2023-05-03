@@ -47,39 +47,6 @@ document.getElementById('message').addEventListener("keydown", (e)=> {
 window.onbeforeunload = leaveSession;
 
 /* Join processes */
-function join() {
-	myname = document.getElementById('yourname').value;
-	fetch(baseUrl+'/chat/join/'+myname, {
-        method: 'get'
-    })
-    .then (response => response.json() )
-    .then (data => completeJoin(data))
-    .catch(error => {
-        {alert("Error: Something went wrong:"+error);}
-    })
-}
-
-function completeJoin(results) {
-	var user = results['user'];
-	if (currentUsers.includes(user) == true){
-		alert("Username already exists!");
-		leaveSession();
-		return;
-	}
-	console.log("Join:"+user);
-	startSession(user);
-	logUser(user);
-}
-
-/* Log users (only on client side right now) */
-function logUser(user) {
-	if (currentUsers.includes(user) == false) {
-		currentUsers.push(user);
-	};
-	for (var i = 0; i < currentUsers.length; i++) {
-  		document.getElementById("members").innerHTML += (i+1) + ": " + currentUsers[i] + " ";
-	};
-}
 
 function removeUser(user) {
 	for (var i = 0; i < currentUsers.length; i++) {
@@ -93,33 +60,6 @@ function removeUser(user) {
 	};
 }
 
-/* Register Users */
-function registerUser() {
-	username = document.getElementById('register-name');
-	email = document.getElementById('register-email');
-	password = document.getElementById('register-password');
-	fetch(baseUrl+'/chat/join/'+username+'/'+email+'/'+password, {
-		method: 'get'
-	})
-	.then (response => response.json())
-	.then (data => completeRegisterUser(data))
-	.catch(error => {
-		{alert("Error: Something went wrong:"+error);}
-	})
-}
-
-function completeRegisterUser(results) {
-	var status = results['status'];
-	if (status != "success") {
-		alert("Username or email already exists!");
-		leaveSession();
-		return;
-	}
-	var user = results['user'];
-	console.log("Register:"+user);
-	startSession(user);
-	logUsers(user);
-}
 
 function completeSend(results) {
 	var status = results['status'];
