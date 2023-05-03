@@ -60,9 +60,6 @@ submitButton.addEventListener("click", registerUser);
 
 
 
-
-
-
 // login button stuff
 
 function loginUser() {
