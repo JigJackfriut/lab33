@@ -174,6 +174,39 @@ function registerUser() {
   }
 }
 
+
+function loginUser() {
+  // Get the form input values
+  const name = document.getElementById("myname").value;
+  const password = document.getElementById("mypass").value;
+
+  // Validate the input
+  if (!name || !password) {
+    alert("Please enter your name and password");
+    return;
+  }
+
+  // Get the stored users data from localStorage
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+
+  // Find the user with the matching name and password
+  const user = users.find(u => u.name === name && u.password === password);
+
+  if (!user) {
+    alert("Invalid name or password");
+    return;
+  }
+
+  // Start the user session and store the user name
+  startSession(name);
+  myname = name;
+
+  alert("Login successful!");
+}
+
+
+  
+        
 function checkIfUsernameExists(username) {
   // Check if username exists in localStorage
   const users = JSON.parse(localStorage.getItem("users")) || [];
