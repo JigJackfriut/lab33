@@ -177,8 +177,8 @@ function registerUser() {
 
 function loginUser() {
   // Get the form input values
-  const name = document.getElementById("myname").value;
-  const password = document.getElementById("mypass").value;
+  const name = document.getElementById("yourname").value;
+  const password = document.getElementById("yourpass").value;
 
   // Validate the input
   if (!name || !password) {
@@ -216,4 +216,7 @@ function checkIfUsernameExists(username) {
 // Attach the registerUser function to the form submit button
 const submitButton = document.getElementById("saveChangesButton");
 submitButton.addEventListener("click", registerUser);
+
+const loginButton = document.getElementById("login-btn");
+loginButton.addEventListener("click", loginUser);
 
